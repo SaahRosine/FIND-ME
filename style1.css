@@ -1,0 +1,183 @@
+:root {
+    --primary-color:blue;
+    --primary-color-dark:blue;
+    --primary-color-light:white;
+    --secondary-color:orange;
+    --text-dark:black;
+    --text-light:grey;
+    --white:white;
+    --max-width:1200px;
+
+
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.section__container {
+    max-width: var(--max-width);
+    margin: auto;
+    padding: 5rem 1rem;
+
+}
+
+.section__header {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.btn {
+    padding: .75rem 2rem;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    white-space: nowrap;
+    color: var(--white);
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+img {
+    width: 100%;
+    display: flex;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+body {
+    font-family: 'poppins', sans-serif;
+}
+
+header {
+    background-image: linear-gradient(
+        to right,
+        rgba(18, 93, 172, 0.9),
+        rgba(18, 93, 172, 0.7)
+    ),
+    url("medical-doctor-background-illustration-ai-generative-free-photo.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.nav__container {
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav__logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.nav__logo span {
+    color: var(--secondary-color);
+}
+
+.nav__links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.link a {
+    padding: 0.5rem;
+    color: var(--primary-color-light);
+
+}
+
+.link a:hover {
+    color: var(--white);
+}
+
+.header__container {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+.header__container h1 {
+    margin-bottom: 1rem;
+    max-width: 800px;
+    font-size: 3.5rem;
+    line-height: 4rem;
+    color: var(--white);
+}
+
+
+.header__container p {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    color: var(--text-dark);
+}
+
+.shop {
+    padding: 100px 9% 30px;
+}
+
+.section-title {
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.product-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.product-box .img-box {
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.img-box {
+    width: 100%;
+    transition: 0.5s;
+}
+
+.img-box:hover img {
+    transform: scale(1.1);
+}
+
+.product-box .product-title {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.product-box .price-and-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-box .price {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.price-and-cart .add-cart {
+    padding: 10px;
+    background: orange;
+    border-radius: 6px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.

@@ -1,0 +1,158 @@
+:root {
+    --primary-color:#007bFF;
+    --primary-color-dark:#007bFF;
+    --primary-color-light:white;
+    --secondary-color:orange;
+    --text-dark:black;
+    --text-light:grey;
+    --white:white;
+    --max-width:1200px;
+
+
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.section__container {
+    max-width: var(--max-width);
+    margin: auto;
+    padding: 5rem 1rem;
+
+}
+
+.section__header {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.btn {
+    padding: .75rem 2rem;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    white-space: nowrap;
+    color: var(--white);
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.toggle-link {
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+img {
+    width: 100%;
+    display: flex;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+body {
+    font-family: 'poppins', sans-serif;
+}
+
+header {
+    background-image: linear-gradient(
+        to right,
+        rgba(18, 93, 172, 0.9),
+        rgba(18, 93, 172, 0.7)
+    ),
+    url("medical-doctor-background-illustration-ai-generative-free-photo.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.nav__container {
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav__logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.nav__logo span {
+    color: var(--secondary-color);
+}
+
+.nav__links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.link a {
+    padding: 0.5rem;
+    color: var(--primary-color-light);
+
+}
+
+.link a:hover {
+    color: var(--white);
+}
+  
+    
+.contact-container {
+      background-color: var(--white);
+      padding: 30px;
+      max-width: var(--max-width);
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-container h2 {
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      text-align: center;
+    }
+
+    .contact-container label {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      color: var(--text-color);
+    }
+
+    .contact-container input,
+    .contact-container textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+    }
+
+    .contact-container button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .contact-container button:hover {
+      background-color: #0056b3;
+    }
+

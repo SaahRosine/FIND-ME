@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="style4.css" class="rel"/>
+    <title>FINDME - Send request</title>
+    </head>
+<body>
+    <header>
+        <nav class="section__container nav__container">
+            <div class="nav__logo">Find<span>me</span></div>
+            <ul class="nav__links">
+                <li class="link"><a href="index.html">logout</a></li>
+                <li class="link"><a href="home.html">Hospitals</a></li>
+                <li class="link"><a href="pharmacy.html">pharmacy</a></li>
+                <li class="link"><a href="sendrequest.html">send request</a></li>
+            </ul>
+
+
+        </nav>
+    </header>
+    
+  <div class="container">
+    <h2>Send a request</h2>
+
+    <form action="submit-service-request.html" method="post">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="service">Which sickness do you have?</label>
+      <select id="service" name="service" required>
+        <option value="">-- Choose an illness --</option>
+        <option value="malaria">malaria</option>
+        <option value="tubercolosis">tubercolosis</option>
+        <option value="influenza">influenza</option>
+        <option value="covid 19">covid 19</option>
+        <option value="hepatitis b">hepatitis b</option>
+        <option value="hepatitis c">hepatitis c</option>
+        <option value="hiv-aids">hiv-aids</option>
+        <option value="measles">measles</option>
+        <option value="dengue fever">dengue fever</option>
+        <option value="cholera">cholera</option>
+        <option value="hypertension">hypertension</option>
+        <option value="diabetis">diabetis (type1and2)</option>
+        <option value="asthma">asthma</option>
+        <option value="chronic obstructure">chronic obstructure</option>
+        <option value="heart disease">heart disease</option>
+        <option value="stroke">stroke</option>
+        <option value="chronic kidney">chronic kidney</option>
+        <option value="arthritis">arthritis</option>
+        <option value="cancer">cancer</option>
+        <option value="liver cirrhosis">liver cirrhosis</option>
+        <option value="depression">depression</option>
+        <option value="anxiety disorder">anxiety disorder</option>
+        <option value="schizophrenia">schizophrenia</option>
+        <option value="post traumatic stress disorder">post traumatic stress disorder</option>
+        <option value="obssessive compulsive disorder">obssessive compulsive disorder</option>
+        <option value="autism spectrum disorder">autism spectrum disorder</option>
+        <option value="maternity care">Maternity Care</option>
+        <option value="attention deficit hyper activity disorder">attention deficit hyper activity disorder</option>
+        <option value="eating disorder">eating disorder</option>
+        <option value="insomnia">insomnia</option>
+        <option value="lupus">lupus</option>
+        <option value="multiple sclerosis">multiple sclerosis</option>
+        <option value="psoriasis">psoriasis</option>
+        <option value="crohn's disease">crohn's disease</option>
+        <option value="pulmonary disease">pulmonary disease</option>
+        <option value="sickle cell anemia">sickle cell anemia</option>
+        <option value="ulcerative coltis">ulcerative colitis</option>
+        <option value="cystic fibrosis">cystic fibrosis</option>
+        <option value="down syndrome">down syndrome</option>
+        <option value="thalassemia">thalassemia</option>
+        <option value="muscular dystrophy">muscular dystrophy</option>
+        <option value="premature birth complication">premature birth complication</option>
+        <option value="polio">polio</option>
+        <option value="mumps">mumps</option>
+        <option value="rubella">rubella</option>
+        <option value="endometrosis">endometrosis</option>
+        <option value="glaucoma">glaucoma</option>
+        <option value="cataract">cataract</option>
+        <option value="epilepsy">epilepsy</option>
+        <option value="migraines">migraines</option>
+        <option value="carcinoma">parkinson's disease</option>
+        <option value="carcinoma">carcinoma</option>
+        <option value="sarcoma">sarcoma</option>
+        <option value="leucemia">leucemia</option>
+        <option value="colorectal cancer">colorectal cancer</option>
+        <option value="esoplageal cancer">esoplageal cancer</option>
+        <option value="stomach cancer">stomach cancer</option>
+        <option value="pancreatic cancer">pancreatic cancer</option>
+        <option value="liver cancer">liver cancer</option>
+        <option value="gallbladder">gallbladder cancer</option>
+        <option value="breast cancer">breast cancer</option>
+        <option value="uterine cancer">uterine cancer</option>
+        <option value="vaginal cancer">vaginal cancer</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="message">Explain how you feel</label>
+      <textarea id="message" name="message" placeholder="Describe your feelings..."></textarea>
+
+      <button type="submit">Submit Request</button>
+    </form>
+
+    <div class="note">
+      Our team will get back to you within the next hours.
+    </div>
+  </div>
+
+</body>
+</html>
+
+<button class="btn" onclick="window.location.href='contactus.html'">contact us</button>

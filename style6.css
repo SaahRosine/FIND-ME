@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root {
     --primary-color:blue;
     --primary-color-dark:blue;
@@ -140,6 +142,10 @@ header {
       max-width: var(--max-width);
       margin: auto;
       padding: 20px;
+      text-align: center;
+       font-size: 15px;
+    text-align: center;
+    margin-bottom: 15px;
     }
 
     .product-grid {
@@ -180,3 +186,51 @@ header {
       border-radius: 4px;
       cursor: pointer;
     }
+
+    .cart {
+  position: relative;
+  margin-top: 40px;
+  padding: 20px;
+  background: white;
+  border: 2px solid #0077ff;
+  border-radius: 8px;
+}
+
+.cart-content {
+  margin-top: 15px;
+}
+
+.cart-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.cart-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.cart-detail {
+  flex: 1;
+}
+
+.cart-quantity {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cart-remove {
+  cursor: pointer;
+  color: red;
+  font-size: 20px;
+}
+
+.total-price {
+  font-weight: bold;
+  margin-top: 10px;
+}
+

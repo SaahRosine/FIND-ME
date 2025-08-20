@@ -54,6 +54,38 @@
 
   <button class="btn" onclick="window.location.href='login.html'">Register</button>
 
+  <script>
+  document.querySelector("form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.querySelector("#name").value.trim();
+    const email = document.querySelector("#email").value.trim();
+    const text = document.querySelector("#message").value.trim();
+
+    if(!name || !email || !text) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    const msg = {
+      uid: localStorage.getItem("fm_current_user") || "guest",
+      name,
+      email,
+      text,
+      ts: Date.now(),
+      origin: "sendrequest"
+    };
+
+    const msgs = JSON.parse(localStorage.getItem("fm_messages") || "[]");
+    msgs.push(msg);
+    localStorage.setItem("fm_messages", JSON.stringify(msgs));
+
+    alert("Message sent successfully!");
+    this.reset();
+  });
+</script>
+
+
 </body>
 </html>
 

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FINDME — Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0b1220;--card:#10192e;--muted:#9fb0c7;--text:#e8eef6;--accent:#3b82f6;--ok:#10b981;--warn:#f59e0b;--bad:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu; background:var(--bg); color:var(--text)}
+    header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:#0d1528;position:sticky;top:0;z-index:10}
+    .brand{font-weight:700;letter-spacing:.3px}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap}
+    .tab{background:var(--card);border:1px solid #1a2542;color:var(--text);padding:8px 12px;border-radius:10px;cursor:pointer}
+    .tab.active{outline:2px solid var(--accent)}
+    .wrap{max-width:1100px;margin:24px auto;padding:0 16px;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid #1a2542;border-radius:14px;padding:16px}
+    h2{margin:6px 0 12px;font-size:20px}
+    label{font-size:14px;color:var(--muted)}
+    input,textarea,select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #1a2542;background:#0d1528;color:var(--text)}
+    textarea{min-height:90px}
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{background:var(--accent);color:#fff;border:none;border-radius:12px;padding:10px 14px;cursor:pointer}
+    .btn.secondary{background:#1f2a4d}
+    .btn.danger{background:var(--bad)}
+    table{width:100%;border-collapse:collapse}
+    th,td{border-bottom:1px solid #1a2542;padding:10px;text-align:left;font-size:14px}
+    .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:12px}
+    .ok{background:rgba(16,185,129,.15);color:var(--ok)}
+    .warn{background:rgba(245,158,11,.15);color:var(--warn)}
+    .bad{background:rgba(239,68,68,.15);color:var(--bad)}
+    .muted{color:var(--muted)}
+    .thumb{width:50px;height:50px;object-fit:cover;border-radius:8px;border:1px solid #1a2542}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+    .kpi{background:var(--card);border:1px solid #1a2542;border-radius:12px;padding:12px}
+    .kpi h3{margin:0;font-size:13px;color:var(--muted)}
+    .kpi .v{font-size:24px;font-weight:700;margin-top:6px}
+    .flex{display:flex;align-items:center;gap:10px}
+    .right{margin-left:auto}
+    .empty{padding:16px;border:1px dashed #1a2542;border-radius:12px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">FINDME • Admin</div>
+    <div class="tabs">
+      <button class="tab active" data-tab="analytics">Analytics</button>
+      <button class="tab" data-tab="products">Pharmacy</button>
+      <button class="tab" data-tab="hospitals">Hospitals</button>
+      <button class="tab" data-tab="messages">Messages</button>
+      <button class="tab" data-tab="settings">Settings</button>
+      <button class="tab" onclick="window.location.href='index.html'">logout</button>
+
+
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section id="analytics" class="card">
+      <h2>Site Analytics</h2>
+      <div class="kpis">
+        <div class="kpi"><h3>Site Views</h3><div class="v" id="kpiViews">0</div></div>
+        <div class="kpi"><h3>Total Logins</h3><div class="v" id="kpiLogins">0</div></div>
+        <div class="kpi"><h3>Total Logouts</h3><div class="v" id="kpiLogouts">0</div></div>
+        <div class="kpi"><h3>Items Added to Cart</h3><div class="v" id="kpiAdds">0</div></div>
+        <div class="kpi"><h3>Completed Purchases</h3><div class="v" id="kpiPurch">0</div></div>
+        <div class="kpi"><h3>Abandoned Carts</h3><div class="v" id="kpiAbd">0</div></div>
+        <div class="kpi"><h3>Hospital Clicks</h3><div class="v" id="kpiHospClicks">0</div></div>
+      </div>
+
+      <div class="grid" style="margin-top:14px">
+        <div class="card">
+          <h2>Hospital Popularity</h2>
+          <table id="tblHospClicks"><thead><tr><th>Hospital</th><th>Clicks</th></tr></thead><tbody></tbody></table>
+        </div>
+        <div class="card">
+          <h2>Recent Events</h2>
+          <div id="eventsList" class="empty">No events yet</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="card" style="display:none">
+      <h2>Pharmacy — Add / Manage Products</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="row">
+            <div style="flex:1">
+              <label>Name</label>
+              <input id="pName" placeholder="e.g., Paracetamol" />
+            </div>
+            <div style="width:180px">
+              <label>Price (FCFA)</label>
+              <input id="pPrice" type="number" min="0" step="1" placeholder="500" />
+            </div>
+          </div>
+          <label style="margin-top:8px;display:block">Short Description</label>
+          <textarea id="pDesc" placeholder="Pain reliever and fever reducer"></textarea>
+          <label style="margin-top:8px;display:block">Image</label>
+          <input id="pImg" type="file" accept="image/*" />
+          <div class="row" style="margin-top:10px">
+            <button class="btn" id="btnAddProduct"><i class="ri-add-line"></i> Add Product</button>
+            <button class="btn secondary" id="btnClearProducts"><i class="ri-delete-bin-line"></i> Clear All</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Products (live)</h2>
+          <table id="tblProducts"><thead><tr><th></th><th>Name</th><th>Price</th><th class="muted">Actions</th></tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section id="hospitals" class="card" style="display:none">
+      <h2>Hospitals — Add / Manage</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="row">
+            <div style="flex:1">
+              <label>Name</label>
+              <input id="hName" placeholder="e.g., General Hospital" />
+            </div>
+            <div style="width:220px">
+              <label>Consultation Price (FCFA)</label>
+              <input id="hPrice" type="number" min="0" step="1" placeholder="15000" />
+            </div>
+          </div>
+          <label style="margin-top:8px;display:block">Description</label>
+          <textarea id="hDesc" placeholder="Generalist doctors, surgery, obstetrics, maternity"></textarea>
+          <label style="margin-top:8px;display:block">Image</label>
+          <input id="hImg" type="file" accept="image/*" />
+          <div class="row" style="margin-top:10px">
+            <button class="btn" id="btnAddHospital"><i class="ri-add-line"></i> Add Hospital</button>
+            <button class="btn secondary" id="btnClearHospitals"><i class="ri-delete-bin-line"></i> Clear All</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Hospitals (live)</h2>
+          <table id="tblHospitals"><thead><tr><th></th><th>Name</th><th>Price</th><th class="muted">Actions</th></tr></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section id="messages" class="card" style="display:none">
+      <h2>Inbox — Requests & Services</h2>
+      <div id="msgList" class="empty">No messages yet</div>
+    </section>
+
+    
+
+    <section id="settings" class="card" style="display:none">
+      <h2>Utilities</h2>
+      <div class="row">
+        <button class="btn danger" id="btnWipeAll"><i class="ri-alert-line"></i> Wipe All Local Data</button>
+        <button class="btn secondary" id="btnExport"><i class="ri-download-2-line"></i> Export JSON</button>
+        <input id="importFile" type="file" accept="application/json" />
+        <button class="btn" id="btnImport"><i class="ri-upload-2-line"></i> Import JSON</button>
+      </div>
+      <p class="muted" style="margin-top:8px">Data is stored locally in your browser (localStorage). For multi-user sync, connect a backend later.</p>
+    </section>
+  </div>
+
+  <script>
+    
+    const DB = {
+      get: (k, def) => JSON.parse(localStorage.getItem(k) || JSON.stringify(def)),
+      set: (k, v) => localStorage.setItem(k, JSON.stringify(v)),
+      del: (k) => localStorage.removeItem(k),
+    };
+
+    
+    const K = {
+      products: 'fm_products',
+      hospitals: 'fm_hospitals',
+      events: 'fm_events',
+      messages: 'fm_messages', 
+      counters: 'fm_counters', 
+    };
+
+    const state = {
+      products: DB.get(K.products, []),
+      hospitals: DB.get(K.hospitals, []),
+      events: DB.get(K.events, []),
+      messages: DB.get(K.messages, []),
+      counters: DB.get(K.counters, {siteViews:0, logins:0, logouts:0, adds:0, purchases:0, abandons:0, hospitalClicks:0}),
+    };
+
+    
+    document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      const id = t.dataset.tab;
+      document.querySelectorAll('section.card').forEach(s=>s.style.display='none');
+      document.getElementById(id).style.display='block';
+    }));
+
+    
+    const toDataURL = (file) => new Promise((res, rej)=>{
+      if(!file) return res('');
+      const fr = new FileReader();
+      fr.onload = ()=>res(fr.result);
+      fr.onerror = rej;
+      fr.readAsDataURL(file);
+    });
+
+    function renderProducts(){
+      const tbody = document.querySelector('#tblProducts tbody');
+      tbody.innerHTML = '';
+      if(state.products.length===0){
+        tbody.innerHTML = '<tr><td colspan="4" class="muted">No products yet</td></tr>';
+        return;
+      }
+      state.products.forEach((p,i)=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td><img class="thumb" src="${p.img||''}"/></td>
+                        <td>${p.name}<div class="muted">${p.desc||''}</div></td>
+                        <td>${p.price} FCFA</td>
+                        <td><button class="btn secondary" data-delp="${i}"><i class='ri-delete-bin-line'></i></button></td>`;
+        tbody.appendChild(tr);
+      });
+      tbody.querySelectorAll('[data-delp]').forEach(btn=>btn.onclick=()=>{
+        const i = +btn.dataset.delp; state.products.splice(i,1); DB.set(K.products,state.products); renderProducts();
+      });
+    }
+
+    function renderHospitals(){
+      const tbody = document.querySelector('#tblHospitals tbody');
+      tbody.innerHTML = '';
+      if(state.hospitals.length===0){
+        tbody.innerHTML = '<tr><td colspan="4" class="muted">No hospitals yet</td></tr>';
+        return;
+      }
+      state.hospitals.forEach((h,i)=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td><img class="thumb" src="${h.img||''}"/></td>
+                        <td>${h.name}<div class="muted">${h.desc||''}</div></td>
+                        <td>${h.price} FCFA</td>
+                        <td><button class="btn secondary" data-delh="${i}"><i class='ri-delete-bin-line'></i></button></td>`;
+        tbody.appendChild(tr);
+      });
+      tbody.querySelectorAll('[data-delh]').forEach(btn=>btn.onclick=()=>{
+        const i = +btn.dataset.delh; state.hospitals.splice(i,1); DB.set(K.hospitals,state.hospitals); renderHospitals();
+      });
+    }
+
+    function renderMessages(){
+      const box = document.getElementById('msgList');
+      box.innerHTML = '';
+      const msgs = state.messages;
+      if(msgs.length===0){ box.className='empty'; box.textContent='No messages yet'; return; }
+      box.className='';
+      const tbl = document.createElement('table');
+      tbl.innerHTML = '<thead><tr><th>When</th><th>Name</th><th>Contact</th><th>From</th><th>Message</th></tr></thead>';
+      const tb = document.createElement('tbody');
+      msgs.slice().reverse().forEach(m=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td class="muted">${new Date(m.ts).toLocaleString()}</td>
+                        <td>${m.name||''}</td>
+                        <td>${m.contact||''}</td>
+                        <td>${m.origin||''}</td>
+                        <td>${m.text||''}</td>`;
+        tb.appendChild(tr);
+      });
+      tbl.appendChild(tb); box.appendChild(tbl);
+    }
+
+    function renderAnalytics(){
+      document.getElementById('kpiViews').textContent = state.counters.siteViews||0;
+      document.getElementById('kpiLogins').textContent = state.counters.logins||0;
+      document.getElementById('kpiLogouts').textContent = state.counters.logouts||0;
+      document.getElementById('kpiAdds').textContent = state.counters.adds||0;
+      document.getElementById('kpiPurch').textContent = state.counters.purchases||0;
+      document.getElementById('kpiAbd').textContent = state.counters.abandons||0;
+      document.getElementById('kpiHospClicks').textContent = state.counters.hospitalClicks||0;
+
+      const tbody = document.querySelector('#tblHospClicks tbody');
+      tbody.innerHTML='';
+      const clicksByHospital = {};
+      state.events.filter(e=>e.type==='hospital_click').forEach(e=>{
+        clicksByHospital[e.payload?.name||'Unknown'] = (clicksByHospital[e.payload?.name||'Unknown']||0)+1;
+      });
+      Object.entries(clicksByHospital).sort((a,b)=>b[1]-a[1]).forEach(([name,c])=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${name}</td><td>${c}</td>`;
+        tbody.appendChild(tr);
+      });
+
+      
+      const evBox = document.getElementById('eventsList');
+      if(state.events.length===0){ evBox.className='empty'; evBox.textContent='No events yet'; return; }
+      evBox.className='';
+      evBox.innerHTML = state.events.slice(-10).reverse().map(e=>{
+        return `<div class="flex"><span class="pill ${e.type.includes('purchase')?'ok':e.type.includes('abandon')?'warn':''}">${e.type}</span><div>${e.msg||''}</div><div class="muted right">${new Date(e.ts).toLocaleString()}</div></div>`
+      }).join('');
+    }
+
+    
+    document.getElementById('btnAddProduct').onclick = async ()=>{
+      const name = document.getElementById('pName').value.trim();
+      const price = parseInt(document.getElementById('pPrice').value||'0');
+      const desc = document.getElementById('pDesc').value.trim();
+      const file = document.getElementById('pImg').files[0];
+      if(!name || !price){ alert('Name and price are required'); return; }
+      const img = await toDataURL(file);
+      state.products.push({id:crypto.randomUUID(), name, price, desc, img});
+      DB.set(K.products, state.products);
+      renderProducts();
+      alert('Product added. It will appear on the Pharmacy page automatically.');
+    };
+    document.getElementById('btnClearProducts').onclick = ()=>{
+      if(confirm('Delete ALL products?')){ state.products=[]; DB.set(K.products,[]); renderProducts(); }
+    };
+
+    
+    document.getElementById('btnAddHospital').onclick = async ()=>{
+      const name = document.getElementById('hName').value.trim();
+      const price = parseInt(document.getElementById('hPrice').value||'0');
+      const desc = document.getElementById('hDesc').value.trim();
+      const file = document.getElementById('hImg').files[0];
+      if(!name || !price){ alert('Name and price are required'); return; }
+      const img = await toDataURL(file);
+      state.hospitals.push({id:crypto.randomUUID(), name, price, desc, img});
+      DB.set(K.hospitals, state.hospitals);
+      renderHospitals();
+      alert('Hospital added. It will appear on the Hospitals page automatically.');
+    };
+    document.getElementById('btnClearHospitals').onclick = ()=>{
+      if(confirm('Delete ALL hospitals?')){ state.hospitals=[]; DB.set(K.hospitals,[]); renderHospitals(); }
+    };
+
+    document.getElementById('btnWipeAll').onclick = ()=>{
+      if(confirm('This will erase ALL FINDME local data on this browser. Continue?')){
+        Object.values(K).forEach(DB.del); location.reload();
+      }
+    };
+    document.getElementById('btnExport').onclick = ()=>{
+      const blob = new Blob([JSON.stringify({
+        products: state.products,
+        hospitals: state.hospitals,
+        events: state.events,
+        messages: state.messages,
+        counters: state.counters
+      }, null, 2)], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'findme-backup.json'; a.click();
+    };
+    document.getElementById('btnImport').onclick = ()=>{
+      const file = document.getElementById('importFile').files[0];
+      if(!file) return alert('Choose a JSON file');
+      const fr = new FileReader();
+      fr.onload = ()=>{
+        try{
+          const data = JSON.parse(fr.result);
+          if(data.products) DB.set(K.products, data.products);
+          if(data.hospitals) DB.set(K.hospitals, data.hospitals);
+          if(data.events) DB.set(K.events, data.events);
+          if(data.messages) DB.set(K.messages, data.messages);
+          if(data.counters) DB.set(K.counters, data.counters);
+          location.reload();
+        }catch(e){ alert('Invalid JSON'); }
+      };
+      fr.readAsText(file);
+    };
+
+    renderProducts();
+    renderHospitals();
+    renderMessages();
+    renderAnalytics();
+  </script>
+</body>
+</html>
+

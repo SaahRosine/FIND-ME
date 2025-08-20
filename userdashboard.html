@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FINDME — User Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    body {margin:0;font-family:system-ui,Segoe UI,Roboto,Ubuntu;background:#0b1220;color:#e8eef6}
+    .wrap {max-width:900px;margin:24px auto;padding:0 16px}
+    h1 {font-size:22px}
+    .card {background:#10192e;border:1px solid #1a2542;border-radius:14px;padding:16px;margin-top:12px}
+    .muted {color:#9fb0c7}
+    table {width:100%;border-collapse:collapse}
+    th,td {border-bottom:1px solid #1a2542;padding:10px;text-align:left;font-size:14px}
+    .profile {display:flex;align-items:center;gap:15px}
+    .avatar {width:60px;height:60px;border-radius:50%;background:#1a2542;display:flex;align-items:center;justify-content:center;font-size:24px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>User Dashboard</h1>
+
+    <div class="card">
+      <h2>Your Profile</h2>
+      <div class="profile">
+        <div class="avatar" id="avatar">👤</div>
+        <div>
+          <div><strong id="uName">Name</strong></div>
+          <div id="uEmail" class="muted">Email</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <h2>Your Purchases</h2>
+      <div id="purchaseList" class="muted">No purchases yet</div>
+    </div>
+
+    
+    <div class="card">
+      <h2>Your Recent Events</h2>
+      <div id="userEvents" class="muted">No recent events</div>
+    </div>
+
+    
+    <div class="card">
+      <h2>Messages You Sent</h2>
+      <div id="userMsgs" class="muted">No messages</div>
+    </div>
+  </div>
+
+  <script>
+    const uid = localStorage.getItem("fm_current_user") || "guest";
+
+    
+    const profiles = JSON.parse(localStorage.getItem("fm_profiles") || "{}");
+    const me = profiles[uid] || {name:"Guest", email:"not set"};
+    document.getElementById("uName").textContent = me.name;
+    document.getElementById("uEmail").textContent = me.email;
+    document.getElementById("avatar").textContent = me.name.charAt(0).toUpperCase();
+
+    
+    const purchases = JSON.parse(localStorage.getItem("fm_purchases") || "[]")
+                        .filter(p => p.uid === uid);
+    const purchaseBox = document.getElementById("purchaseList");
+    if(purchases.length) {
+      const table = document.createElement("table");
+      table.innerHTML = "<thead><tr><th>Date</th><th>Items</th><th>Total</th></tr></thead>";
+      const tbody = document.createElement("tbody");
+
+      purchases.forEach(p => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${new Date(p.ts).toLocaleString()}</td>
+          <td>${p.items.map(i => `${i.name} x${i.qty}`).join(", ")}</td>
+          <td>${p.total} FCFA</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(tbody);
+      purchaseBox.innerHTML = "";
+      purchaseBox.appendChild(table);
+    }
+
+  
+    const events = JSON.parse(localStorage.getItem('fm_events')||'[]');
+    const myEvents = events.filter(e=>e.uid===uid).slice(-15).reverse();
+    const evBox = document.getElementById('userEvents');
+    if(myEvents.length){
+      evBox.innerHTML = myEvents.map(e=>`<div><strong>${e.type}</strong> — ${e.msg||''} <span class='muted'>(${new Date(e.ts).toLocaleString()})</span></div>`).join('');
+    }
+
+
+    const allMsgs = JSON.parse(localStorage.getItem('fm_messages')||'[]').filter(m=>m.uid===uid);
+    const msgBox = document.getElementById('userMsgs');
+    if(allMsgs.length){
+      const t = document.createElement('table');
+      t.innerHTML = '<thead><tr><th>When</th><th>From</th><th>Message</th></tr></thead>';
+      const tb = document.createElement('tbody');
+      allMsgs.slice().reverse().forEach(m=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${new Date(m.ts).toLocaleString()}</td><td>${m.origin||''}</td><td>${m.text||''}</td>`;
+        tb.appendChild(tr);
+      });
+      t.appendChild(tb); msgBox.innerHTML=''; msgBox.appendChild(t);
+    }
+  </script>
+</body>
+</html>
+

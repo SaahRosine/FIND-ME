@@ -1,67 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: linear-gradient(to bottom, #f0f8ff, #ffffff);
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            text-align: center;
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-        }
-        h1 {
-            color: #007BFF;
-            margin-bottom: 20px;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .submit-button {
-            background-color: #007BFF;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        .submit-button:hover {
-            background-color: #0056b3;
-        }
-        .toggle-link {
-            margin-top: 20px;
-            color: #007bff;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to bottom, #f0f8ff, #ffffff);
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      text-align: center;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+    }
+    h1 {
+      color: #007BFF;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .submit-button {
+      background-color: #007BFF;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .submit-button:hover {
+      background-color: #0056b3;
+    }
+    .toggle-link {
+      margin-top: 20px;
+      color: #007bff;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Login</h1>
-        <input type="email" placeholder="Email" required>
-        <input type="password" placeholder="Password" required>
-        <button class="submit-button">Login</button>
-        
-        <div class="toggle-link" onclick="window.location.href='signup.html'">Don't have an account? Sign up</div>
+  <div class="container">
+    <h1>Login</h1>
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button class="submit-button" onclick="login()">Login</button>
+
+    <div class="toggle-link" onclick="window.location.href='signup.html'">
+      Don't have an account? Sign up
     </div>
+  </div>
+
+  <script>
+    function login() {
+      const name = document.getElementById("name").value.trim().toLowerCase();
+      const email = document.getElementById("email").value.trim().toLowerCase();
+      const password = document.getElementById("password").value.trim();
+
+      
+      if (name === "admin" && email === "admin@gmail.com") {
+        alert("Welcome Admin!");
+        localStorage.setItem("fm_current_user", "admin");
+        window.location.href = "admindashboard.html"; 
+        return;
+      }
+
+      if (email && password) {
+        alert("Welcome " + name + "!");
+        localStorage.setItem("fm_current_user", email); 
+        window.location.href = "userdashboard.html"; 
+      } else {
+        alert("Please enter all fields.");
+      }
+    }
+  </script>
 </body>
 </html>
-

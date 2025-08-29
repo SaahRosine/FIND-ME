@@ -1,0 +1,82 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+  <!-- Static CSS -->
+  <link rel="stylesheet" href="{% static 'css/style8.css' %}"/>
+  <title>Pharmacies | Find Hospital</title>
+</head>
+<body>
+  <header>
+    <nav class="section__container nav__container">
+      <div class="nav__logo">Find<span>me</span></div>
+      <ul class="nav__links">
+        <li class="link"><a href="{% url 'logout' %}">Logout</a></li>
+        <li class="link"><a href="{% url 'home' %}">Hospitals</a></li>
+        <li class="link"><a href="{% url 'pharmacy' %}">Pharmacy</a></li>
+        <li class="link"><a href="{% url 'sendrequest' %}">Send Request</a></li>
+      </ul>
+      <button class="btn" onclick="window.location.href='{% url 'contact' %}'">Contact Us</button>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Our Pharmacies</h2>
+    <div class="product-grid">
+
+      <div class="product">
+        <img src="{% static 'images/R (1).jpeg' %}" alt="olembe pharmacy">
+        <h3>Olembe Pharmacy</h3>
+        <p>Located at Échangeur Olembe</p>
+        <button>Shop Now</button>
+      </div>
+
+      <div class="product">
+        <img src="{% static 'images/amoxicillin-tablets-1000mg.jpeg' %}" alt="pharmacie du 20mai">
+        <h3>Pharmacie du 20 Mai</h3>
+        <p>Located at the 20 May Boulevard</p>
+        <button>Shop Now</button>
+      </div>
+
+      <div class="product">
+        <img src="{% static 'images/R (2).jpeg' %}" alt="centre providence pharmacy">
+        <h3>Centre Providence Pharmacy</h3>
+        <p>Located at Ebang</p>
+        <button>Shop Now</button>
+      </div>
+
+      <div class="product">
+        <img src="{% static 'images/OIP (7).webp' %}" alt="emana pharmacy">
+        <h3>Emana Pharmacy</h3>
+        <p>Located at Borne Fontaine Emana</p>
+        <button>Shop Now</button>
+      </div>
+
+      <div class="product">
+        <img src="{% static 'images/OIP (8).webp' %}" alt="pharmacie du soleil">
+        <h3>Pharmacie du Soleil</h3>
+        <p>Located at Don’t Know Where</p>
+        <button>Shop Now</button>
+      </div>
+
+      <div class="product">
+        <img src="{% static 'images/OIP (9).webp' %}" alt="nkozoa pharmacy">
+        <h3>Nkozoa Pharmacy</h3>
+        <p>Located at Champs de Tir Nkozoa</p>
+        <button>Shop Now</button>
+      </div>
+
+      <div class="product">
+        <img src="{% static 'images/OIP (10).webp' %}" alt="essos pharmacy">
+        <h3>Essos Pharmacy</h3>
+        <p>Located at Essos</p>
+        <button>Shop Now</button>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

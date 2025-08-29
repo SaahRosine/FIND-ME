@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +62,7 @@
     <input type="password" id="password" placeholder="Password" required>
     <button class="submit-button" onclick="login()">Login</button>
 
-    <div class="toggle-link" onclick="window.location.href='signup.html'">
+    <div class="toggle-link" onclick="window.location.href='{% url "signup" %}'">
       Don't have an account? Sign up
     </div>
   </div>
@@ -72,18 +73,17 @@
       const email = document.getElementById("email").value.trim().toLowerCase();
       const password = document.getElementById("password").value.trim();
 
-      
       if (name === "admin" && email === "admin@gmail.com") {
         alert("Welcome Admin!");
         localStorage.setItem("fm_current_user", "admin");
-        window.location.href = "admindashboard.html"; 
+        window.location.href = "{% url 'admin_dashboard' %}";
         return;
       }
 
       if (email && password) {
         alert("Welcome " + name + "!");
-        localStorage.setItem("fm_current_user", email); 
-        window.location.href = "userdashboard.html"; 
+        localStorage.setItem("fm_current_user", email);
+        window.location.href = "{% url 'user_dashboard' %}";
       } else {
         alert("Please enter all fields.");
       }

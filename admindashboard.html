@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,25 +54,11 @@
       <button class="tab" data-tab="hospitals">Hospitals</button>
       <button class="tab" data-tab="messages">Messages</button>
       <button class="tab" data-tab="settings">Settings</button>
-      <button class="tab" onclick="window.location.href='index.html'">logout</button>
-
-
+      <button class="tab" onclick="window.location.href='{% url 'index' %}'">logout</button>
     </div>
   </header>
 
-  <div class="wrap">
-    <section id="analytics" class="card">
-      <h2>Site Analytics</h2>
-      <div class="kpis">
-        <div class="kpi"><h3>Site Views</h3><div class="v" id="kpiViews">0</div></div>
-        <div class="kpi"><h3>Total Logins</h3><div class="v" id="kpiLogins">0</div></div>
-        <div class="kpi"><h3>Total Logouts</h3><div class="v" id="kpiLogouts">0</div></div>
-        <div class="kpi"><h3>Items Added to Cart</h3><div class="v" id="kpiAdds">0</div></div>
-        <div class="kpi"><h3>Completed Purchases</h3><div class="v" id="kpiPurch">0</div></div>
-        <div class="kpi"><h3>Abandoned Carts</h3><div class="v" id="kpiAbd">0</div></div>
-        <div class="kpi"><h3>Hospital Clicks</h3><div class="v" id="kpiHospClicks">0</div></div>
-      </div>
-
+  
       <div class="grid" style="margin-top:14px">
         <div class="card">
           <h2>Hospital Popularity</h2>
@@ -106,6 +93,7 @@
             <button class="btn" id="btnAddProduct"><i class="ri-add-line"></i> Add Product</button>
             <button class="btn secondary" id="btnClearProducts"><i class="ri-delete-bin-line"></i> Clear All</button>
           </div>
+          
         </div>
         <div class="card">
           <h2>Products (live)</h2>
@@ -147,6 +135,36 @@
     <section id="messages" class="card" style="display:none">
       <h2>Inbox — Requests & Services</h2>
       <div id="msgList" class="empty">No messages yet</div>
+
+      
+  <div class="user-request">
+  <button onclick="sendNotification('Consultation Accepted', 'Your request at your choosen Hospital was approved.')">
+    Accept
+  </button>
+  <button onclick="sendNotification('Consultation Rejected', 'Sorry, your request at your choosen Hospital was declined.')">
+    Reject
+  </button>
+  <button onclick="sendNotification('New Reply', 'Admin replied: Please come tomorrow at 10 AM.')">
+    Reply
+  </button>
+</div>
+
+<script>
+  function sendNotification(title, message) {
+    let notifications = JSON.parse(localStorage.getItem("fm_notifications") || "[]");
+
+    notifications.push({
+      title: title,
+      message: message,
+      time: new Date().toLocaleString()
+    });
+
+    localStorage.setItem("fm_notifications", JSON.stringify(notifications));
+
+    
+    
+  }
+</script>
     </section>
 
     
@@ -369,6 +387,10 @@
     renderMessages();
     renderAnalytics();
   </script>
+
+
+
 </body>
 </html>
+
 

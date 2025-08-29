@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'css/style7.css' %}" class="rel"/>
+  <title>Notifications | Find Hospital</title>
+</head>
+<body>
+    <header>
+        <nav class="section__container nav__container">
+            <div class="nav__logo">Find<span>me</span></div>
+            <ul class="nav__links">
+                <li class="link"><a href="{% url 'index' %}">logout</a></li>
+                <li class="link"><a href="{% url 'hospitals' %}">Hospitals</a></li>
+                <li class="link"><a href="{% url 'pharmacy' %}">pharmacy</a></li>
+                <li class="link"><a href="{% url 'send_request' %}">send request</a></li>
+            </ul>
+
+            <button class="btn" onclick="window.location.href='{% url 'contact_us' %}'">contact us</button>
+
+            <div class="notification-icon" onclick="window.location.href='{% url 'notification' %}'">
+            </div>
+        </nav>
+    </header>
+    
+
+    <div class="notifications-container" id="notifications-list">
+    
+    </div>
+
+    <script>
+        const notifications = JSON.parse(localStorage.getItem("fm_notifications") || "[]");
+        const container = document.getElementById("notifications-list");
+
+        if (notifications.length === 0) {
+          container.innerHTML = "<p style='text-align:center;color:#777;'>No notifications yet</p>";
+        } else {
+          notifications.reverse().forEach(n => { 
+            const div = document.createElement("div");
+            div.className = "notification-box";
+            div.innerHTML = `
+              <i class="ri-notification-3-line"></i>
+              <div class="notification-content">
+                <h3>${n.title}</h3>
+                <p>${n.message}</p>
+                <span class="notification-time">${n.time}</span>
+              </div>
+            `;
+            container.appendChild(div);
+          });
+        }
+    </script>
+
+    <script src="{% static 'script3.js' %}"></script>
+
+</body>
+</html>

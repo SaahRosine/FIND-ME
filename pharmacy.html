@@ -1,9 +1,11 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="style6.css"/>
+  <link rel="stylesheet" href="{% static 'style6.css' %}"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
   <title>FINDME - Pharmacy</title>
   <style>
@@ -13,6 +15,50 @@
       font-weight: bold;
       color: blue;
     }
+    
+    .notification-icon {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .notification-icon i {
+      font-size: 1.8rem;
+      color: black;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .notification-icon i:hover {
+      color: blue;
+      transform: scale(1.1);
+    }
+
+    .notification-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: orangered;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: bold;
+      border-radius: 50%;
+      padding: 2px 6px;
+    }
+
+    .user-icon {
+      cursor: pointer;
+    }
+
+    .user-icon i {
+      font-size: 1.8rem;  
+      color: black;      
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .user-icon i:hover {
+      color: blue;        
+      transform: scale(1.1); 
+    }
+
     .add-cart {
       display: inline-block;
       padding: 8px 12px;
@@ -26,7 +72,6 @@
     .add-cart:hover {
       background: #0056b3;
     }
-    /* Cart floating panel */
     .cart {
       position: fixed;
       top: 0;
@@ -58,26 +103,33 @@
   </style>
 </head>
 <body>
-  <!-- HEADER -->
+  
   <header>
     <nav class="section__container nav__container">
       <div class="nav__logo">Find<span>me</span></div>
       <ul class="nav__links">
-        <li class="link"><a href="index.html">Logout</a></li>
-        <li class="link"><a href="home.html">Hospitals</a></li>
-        <li class="link"><a href="pharmacy.html">Pharmacy</a></li>
-        <li class="link"><a href="sendrequest.html">Send Request</a></li>
+        <li class="link"><a href="{% url 'index' %}">Logout</a></li>
+        <li class="link"><a href="{% url 'hospitals' %}">Hospitals</a></li>
+        <li class="link"><a href="{% url 'pharmacy' %}">Pharmacy</a></li>
+        <li class="link"><a href="{% url 'sendrequest' %}">Send Request</a></li>
       </ul>
-      <button class="btn" onclick="window.location.href='contactus.html'">Contact Us</button>
+      <button class="btn" onclick="window.location.href='{% url 'contactus' %}'">Contact Us</button>
+
+      <div class="notification-icon" onclick="window.location.href='{% url 'notification' %}'">
+        <i class="ri-notification-3-line"></i>
+        <span class="notification-count">1</span> 
+      </div>
     </nav>
   </header>
 
-  <!-- MEDICINE PRODUCTS -->
+  <div class="user-icon" onclick="window.location.href='{% url 'userdashboard' %}'">
+    <i class="ri-account-circle-2-fill"></i>
+  </div>
+
   <div class="container">
     <h2>Our Medicines</h2>
     <div class="product-grid">
-
-      <!-- STATIC PRODUCTS -->
+      <!-- Hardcoded products -->
       <div class="product">
         <img src="R (1).jpeg" alt="Paracetamol">
         <h3>Paracetamol</h3>
@@ -85,7 +137,6 @@
         <span class="price">100 FCFA</span>
         <button class="add-cart">Add to Cart</button>
       </div>
-
       <div class="product">
         <img src="amoxicillin-tablets-1000mg.jpeg" alt="Amoxicillin">
         <h3>Amoxicillin</h3>
@@ -93,7 +144,6 @@
         <span class="price">100 FCFA</span>
         <button class="add-cart">Add to Cart</button>
       </div>
-
       <div class="product">
         <img src="R (2).jpeg" alt="Ibuprofen">
         <h3>Ibuprofen</h3>
@@ -101,64 +151,27 @@
         <span class="price">100 FCFA</span>
         <button class="add-cart">Add to Cart</button>
       </div>
-
       <div class="product">
         <img src="OIP (7).webp" alt="Cough Syrup">
         <h3>Cough Syrup</h3>
         <p>Soothes dry and wet coughs</p>
-          <span class="price">100F</span>
+        <span class="price">100 FCFA</span>
         <button class="add-cart">Add to Cart</button>
       </div>
-
       <div class="product">
         <img src="OIP (8).webp" alt="Efferalgan">
         <h3>Efferalgan</h3>
-        <p>pain reliever</p>
-          <span class="price">100F</span>
+        <p>Pain reliever</p>
+        <span class="price">100 FCFA</span>
         <button class="add-cart">Add to Cart</button>
       </div>
-
       <div class="product">
         <img src="OIP (9).webp" alt="Metronizadole 250mg">
         <h3>Metronizadole 250mg</h3>
         <p>Soothes stomach ache</p>
-          <span class="price">100F</span>
+        <span class="price">100 FCFA</span>
         <button class="add-cart">Add to Cart</button>
       </div>
-
-      <div class="product">
-        <img src="OIP (10).webp" alt="arthemeter">
-        <h3>arthemeter</h3>
-        <p>cures malaria </p>
-          <span class="price">100F</span>
-        <button class="add-cart">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="OIP (11).webp" alt="cotrim 250mg">
-        <h3>Cotrim 250mg</h3>
-        <p>Soothes aches</p>
-          <span class="price">100F</span>
-        <button class="add-cart">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="IMG-39-scaled.jpeg" alt="Dexacure">
-        <h3>Dexacure</h3>
-        <p>cures your allergies</p>
-          <span class="price">100F</span>
-        <button class="add-cart">Add to Cart</button>
-      </div>
-
-      <div class="product">
-        <img src="OIP (9).webp" alt="Metronizadole 250mg">
-        <h3>Metronizadole 250mg</h3>
-        <p>Soothes stomach ache</p>
-          <span class="price">100F</span>
-        <button class="add-cart">Add to Cart</button>
-      </div>
-
-
     </div>
   </div>
 
@@ -171,9 +184,8 @@
   </div>
   <div class="cart-icon"><i class="ri-shopping-cart-2-line"></i></div>
 
-  <!-- JS -->
   <script>
-    // CART SYSTEM
+    // Simple static cart functionality
     const cart = [];
     const cartItemsEl = document.querySelector(".cart-items");
     const cartTotalEl = document.querySelector(".cart-total");
@@ -190,105 +202,32 @@
       cartTotalEl.textContent = `Total: ${total} FCFA`;
     }
 
-    // Add to Cart listener (static + dynamic)
     document.addEventListener("click", e => {
-      if (e.target.classList.contains("add-cart")) {
+      if(e.target.classList.contains("add-cart")) {
         const product = e.target.closest(".product");
         const name = product.querySelector("h3").textContent;
         const price = parseInt(product.querySelector(".price").textContent);
         const existing = cart.find(c => c.name === name);
-        if (existing) {
-          existing.qty++;
-        } else {
-          cart.push({ name, price, qty: 1 });
-        }
+        if(existing) existing.qty++;
+        else cart.push({name, price, qty:1});
         renderCart();
       }
     });
 
-    // Open/close cart
     const cartIcon = document.querySelector(".cart-icon");
     const cartBox = document.querySelector(".cart");
     const cartClose = document.querySelector("#cart-close");
     cartIcon.addEventListener("click", () => cartBox.classList.add("active"));
     cartClose.addEventListener("click", () => cartBox.classList.remove("active"));
 
-    // DYNAMIC PRODUCTS (Admin added)
-    const grid = document.querySelector('.product-grid');
-    const products = JSON.parse(localStorage.getItem('fm_products') || '[]');
-    products.forEach(p => {
-      const card = document.createElement('div');
-      card.className = 'product';
-      card.innerHTML = `
-        <img src="${p.img || ''}" alt="${p.name}">
-        <h3>${p.name}</h3>
-        <p>${p.desc || ''}</p>
-        <span class="price">${p.price} FCFA</span>
-        <button class="add-cart">Add to Cart</button>
-      `;
-      grid.appendChild(card);
-    });
-
-    // Checkout + Delivery
     function checkout() {
-      if (cart.length === 0) {
-        alert("Your cart is empty!");
-        return;
-      }
-      const total = cart.reduce((sum, p) => sum + p.price * p.qty, 0);
-      showDeliveryForm(total);
-    }
-
-    function showDeliveryForm(total) {
-      let formBox = document.querySelector(".delivery-form-box");
-      if (!formBox) {
-        formBox = document.createElement("div");
-        formBox.className = "delivery-form-box";
-        formBox.style.position = "fixed";
-        formBox.style.top = "50%";
-        formBox.style.left = "50%";
-        formBox.style.transform = "translate(-50%, -50%)";
-        formBox.style.background = "#fff";
-        formBox.style.padding = "20px";
-        formBox.style.borderRadius = "12px";
-        formBox.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
-        formBox.style.zIndex = "9999";
-        formBox.innerHTML = `
-          <h3>Delivery Information</h3>
-          <p>Total: <strong>${total} FCFA</strong></p>
-          <input type="text" id="dName" placeholder="Full Name" style="width:100%;margin:8px 0;padding:8px;">
-          <input type="text" id="dPhone" placeholder="Phone Number" style="width:100%;margin:8px 0;padding:8px;">
-          <input type="text" id="dAddress" placeholder="Delivery Address" style="width:100%;margin:8px 0;padding:8px;">
-          <button id="confirmDelivery" style="margin-top:10px;padding:10px 15px;background:#007BFF;color:#fff;border:none;border-radius:6px;cursor:pointer;">Confirm Delivery</button>
-          <button id="cancelDelivery" style="margin-top:10px;padding:10px 15px;background:#ccc;border:none;border-radius:6px;cursor:pointer;">Cancel</button>
-        `;
-        document.body.appendChild(formBox);
-
-        formBox.querySelector("#cancelDelivery").addEventListener("click", () => formBox.remove());
-        formBox.querySelector("#confirmDelivery").addEventListener("click", () => {
-          const name = document.getElementById("dName").value.trim();
-          const phone = document.getElementById("dPhone").value.trim();
-          const address = document.getElementById("dAddress").value.trim();
-          if (!name || !phone || !address) {
-            alert("Please fill in all fields.");
-            return;
-          }
-          const deliveries = JSON.parse(localStorage.getItem("fm_deliveries") || "[]");
-          deliveries.push({
-            uid: localStorage.getItem("fm_current_user") || "guest",
-            name, phone, address,
-            items: cart.map(c => ({ name: c.name, qty: c.qty, price: c.price })),
-            total,
-            ts: Date.now()
-          });
-          localStorage.setItem("fm_deliveries", JSON.stringify(deliveries));
-          alert("Thank you! Your delivery request has been sent.");
-          formBox.remove();
-          cart.length = 0;
-          renderCart();
-        });
-      }
+      if(cart.length === 0) return alert("Your cart is empty!");
+      alert("Delivery request sent. Thank you!");
+      cart.length = 0;
+      renderCart();
+      cartBox.classList.remove("active");
     }
   </script>
 </body>
 </html>
+
